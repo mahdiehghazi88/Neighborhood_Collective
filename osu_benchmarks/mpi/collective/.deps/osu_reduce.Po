@@ -1,0 +1,182 @@
+osu_reduce.o: osu_reduce.c \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/stdc-predef.h \
+ osu_coll.h ../../../src/include/mpi.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/stdint.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/features.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/sys/cdefs.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/wordsize.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/gnu/stubs.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/gnu/stubs-64.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/wchar.h \
+ ../../../src/include/mpio.h ../../../src/include/mpi.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/unistd.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/posix_opt.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/environments.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/types.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/typesizes.h \
+ /cvmfs/soft.computecanada.ca/nix/store/lvjwgn6hpngyy6k4xqcqa9h2cxy3fl30-gfortran-5.4.0/lib/gcc/x86_64-unknown-linux-gnu/5.4.0/include/stddef.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/confname.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/getopt.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/stdlib.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/waitflags.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/waitstatus.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/sys/types.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/time.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/endian.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/endian.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/byteswap.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/byteswap-16.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/sys/select.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/select.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/sigset.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/time.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/sys/sysmacros.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/pthreadtypes.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/alloca.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/stdlib-bsearch.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/stdlib-float.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/stdio.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/libio.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/_G_config.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/wchar.h \
+ /cvmfs/soft.computecanada.ca/nix/store/lvjwgn6hpngyy6k4xqcqa9h2cxy3fl30-gfortran-5.4.0/lib/gcc/x86_64-unknown-linux-gnu/5.4.0/include/stdarg.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/stdio_lim.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/sys_errlist.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/stdio.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/math.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/math-vector.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/libm-simd-decl-stubs.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/huge_val.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/huge_valf.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/huge_vall.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/inf.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/nan.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/mathdef.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/mathcalls.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/mathinline.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/string.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/xlocale.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/string.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/string2.h
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/stdc-predef.h:
+
+osu_coll.h:
+
+../../../src/include/mpi.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/stdint.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/features.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/sys/cdefs.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/wordsize.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/gnu/stubs.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/gnu/stubs-64.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/wchar.h:
+
+../../../src/include/mpio.h:
+
+../../../src/include/mpi.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/unistd.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/posix_opt.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/environments.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/types.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/typesizes.h:
+
+/cvmfs/soft.computecanada.ca/nix/store/lvjwgn6hpngyy6k4xqcqa9h2cxy3fl30-gfortran-5.4.0/lib/gcc/x86_64-unknown-linux-gnu/5.4.0/include/stddef.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/confname.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/getopt.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/stdlib.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/waitflags.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/waitstatus.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/sys/types.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/time.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/endian.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/endian.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/byteswap.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/byteswap-16.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/sys/select.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/select.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/sigset.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/time.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/sys/sysmacros.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/pthreadtypes.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/alloca.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/stdlib-bsearch.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/stdlib-float.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/stdio.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/libio.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/_G_config.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/wchar.h:
+
+/cvmfs/soft.computecanada.ca/nix/store/lvjwgn6hpngyy6k4xqcqa9h2cxy3fl30-gfortran-5.4.0/lib/gcc/x86_64-unknown-linux-gnu/5.4.0/include/stdarg.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/stdio_lim.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/sys_errlist.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/stdio.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/math.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/math-vector.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/libm-simd-decl-stubs.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/huge_val.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/huge_valf.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/huge_vall.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/inf.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/nan.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/mathdef.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/mathcalls.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/mathinline.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/string.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/xlocale.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/string.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/string2.h:

@@ -1,0 +1,35 @@
+src/mpi/init/lib_libmpi_la-initinfo.lo: src/mpi/init/initinfo.c \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/stdc-predef.h \
+ src/include/mpi.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/stdint.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/features.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/sys/cdefs.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/wordsize.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/gnu/stubs.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/gnu/stubs-64.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/wchar.h \
+ src/include/mpio.h src/include/mpi.h src/include/mpichinfo.h
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/stdc-predef.h:
+
+src/include/mpi.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/stdint.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/features.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/sys/cdefs.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/wordsize.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/gnu/stubs.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/gnu/stubs-64.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/wchar.h:
+
+src/include/mpio.h:
+
+src/include/mpi.h:
+
+src/include/mpichinfo.h:

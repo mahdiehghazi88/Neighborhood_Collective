@@ -1,0 +1,84 @@
+opa_queue.lo: opa_queue.c \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/stdc-predef.h \
+ opa_queue.h opa_primitives.h opa_config.h opa_util.h \
+ primitives/opa_gcc_intel_32_64.h \
+ primitives/opa_gcc_intel_32_64_barrier.h \
+ primitives/opa_gcc_intel_32_64_ops.h primitives/opa_emulated.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/pthread.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/features.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/sys/cdefs.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/wordsize.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/gnu/stubs.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/gnu/stubs-64.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/endian.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/endian.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/byteswap.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/types.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/typesizes.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/byteswap-16.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/sched.h \
+ /cvmfs/soft.computecanada.ca/nix/store/lvjwgn6hpngyy6k4xqcqa9h2cxy3fl30-gfortran-5.4.0/lib/gcc/x86_64-unknown-linux-gnu/5.4.0/include/stddef.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/time.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/sched.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/time.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/xlocale.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/pthreadtypes.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/setjmp.h
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/stdc-predef.h:
+
+opa_queue.h:
+
+opa_primitives.h:
+
+opa_config.h:
+
+opa_util.h:
+
+primitives/opa_gcc_intel_32_64.h:
+
+primitives/opa_gcc_intel_32_64_barrier.h:
+
+primitives/opa_gcc_intel_32_64_ops.h:
+
+primitives/opa_emulated.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/pthread.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/features.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/sys/cdefs.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/wordsize.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/gnu/stubs.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/gnu/stubs-64.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/endian.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/endian.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/byteswap.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/types.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/typesizes.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/byteswap-16.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/sched.h:
+
+/cvmfs/soft.computecanada.ca/nix/store/lvjwgn6hpngyy6k4xqcqa9h2cxy3fl30-gfortran-5.4.0/lib/gcc/x86_64-unknown-linux-gnu/5.4.0/include/stddef.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/time.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/sched.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/time.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/xlocale.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/pthreadtypes.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/setjmp.h:

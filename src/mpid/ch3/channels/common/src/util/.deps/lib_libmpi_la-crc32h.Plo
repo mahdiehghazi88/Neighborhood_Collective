@@ -1,0 +1,38 @@
+src/mpid/ch3/channels/common/src/util/lib_libmpi_la-crc32h.lo: \
+ src/mpid/ch3/channels/common/src/util/crc32h.c \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/stdc-predef.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/string.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/features.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/sys/cdefs.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/wordsize.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/gnu/stubs.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/gnu/stubs-64.h \
+ /cvmfs/soft.computecanada.ca/nix/store/lvjwgn6hpngyy6k4xqcqa9h2cxy3fl30-gfortran-5.4.0/lib/gcc/x86_64-unknown-linux-gnu/5.4.0/include/stddef.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/xlocale.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/string.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/string2.h \
+ /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/stdlib.h
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/stdc-predef.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/string.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/features.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/sys/cdefs.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/wordsize.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/gnu/stubs.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/gnu/stubs-64.h:
+
+/cvmfs/soft.computecanada.ca/nix/store/lvjwgn6hpngyy6k4xqcqa9h2cxy3fl30-gfortran-5.4.0/lib/gcc/x86_64-unknown-linux-gnu/5.4.0/include/stddef.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/xlocale.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/string.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/bits/string2.h:
+
+/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/include/stdlib.h:
