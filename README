@@ -1,4 +1,4 @@
-This code implements An Efficient Collaborative Communication Mechanism for MPI Neighborhood Collectives, IPDPS2019.
+This code implements An Efficient Collaborative Communication Mechanism for MPI Neighborhood Collectives. The paper is published at IPDPS2019. 
 The description of the design is available at https://ieeexplore.ieee.org/abstract/document/8821035.
 
 The communication pattern is created in src/mpi/topo/dist_gr_create_adj.c
