@@ -28,44 +28,39 @@ int MPI_Ineighbor_allgather(const void *sendbuf, int sendcount, MPI_Datatype sen
 #undef MPI_Ineighbor_allgather
 #define MPI_Ineighbor_allgather PMPI_Ineighbor_allgather
 
-int find_incom_tmp_buff_size(int **incom_sched_mat, int num_rows, int size_per_rank)
-{
+int find_incom_tmp_buff_size(int **incom_sched_mat, int num_rows, int size_per_rank) {
     int i, buff_size;
     buff_size = 0;
-    for(i = 0; i < num_rows; i++)
-    {
-    	if(incom_sched_mat[i][K_vrbl+2]==2)
-    		buff_size += K_vrbl * size_per_rank;
-    	else if (incom_sched_mat[i][K_vrbl+2]==1)
+    for(i = 0; i < num_rows; i++) {
+        if(incom_sched_mat[i][K_vrbl+2]==2) {
+            buff_size += K_vrbl * size_per_rank;
+    	} else if (incom_sched_mat[i][K_vrbl+2]==1) {
     		buff_size +=size_per_rank;
+	}
     }
     return buff_size;
 }
 
-int find_in_arr(int *array, int size, int value)
-{
+int find_in_arr(int *array, int size, int value) {
     int i, self_rank;
     MPI_Comm_rank(MPI_COMM_WORLD, &self_rank);
-    for(i = 0; i < size; i++)
-    {
-        if(array[i] == value)
-        {
+    for(i = 0; i < size; i++) {
+        if(array[i] == value) {
             return i;
         }
     }
     return -1;
 }
 
-int find_incom_tmp_buf_offset(int **incom_sched_mat, int nbr_index, int size_per_rank)
-{
+int find_incom_tmp_buf_offset(int **incom_sched_mat, int nbr_index, int size_per_rank) {
     int i, offset;
     offset = 0;
-    for(i = 0; i < nbr_index; i++)
-    {
-    	if(incom_sched_mat[i][K_vrbl+2]==2)
-    		offset += K_vrbl * size_per_rank;
-    	else if (incom_sched_mat[i][K_vrbl+2]==1)
-    		offset +=size_per_rank;
+    for(i = 0; i < nbr_index; i++) {
+        if(incom_sched_mat[i][K_vrbl+2]==2) {
+    	    offset += K_vrbl * size_per_rank;
+    	} else if (incom_sched_mat[i][K_vrbl+2]==1) {
+    	    offset +=size_per_rank;
+        }
     }
     return offset;
 }
@@ -75,8 +70,7 @@ int find_incom_tmp_buf_offset(int **incom_sched_mat, int nbr_index, int size_per
 #undef FCNAME
 #define FCNAME MPIU_QUOTE(FUNCNAME)
 int MPIR_Ineighbor_allgather_SMGM(const void *sendbuf, int sendcount, MPI_Datatype sendtype, void *recvbuf, int recvcount,
-                                MPI_Datatype recvtype, MPID_Comm *comm_ptr, MPID_Sched_t s)
-{
+                                MPI_Datatype recvtype, MPID_Comm *comm_ptr, MPID_Sched_t s) {
 
 	int mpi_errno = MPI_SUCCESS;
 	int tag = -1;
@@ -133,133 +127,101 @@ int MPIR_Ineighbor_allgather_SMGM(const void *sendbuf, int sendcount, MPI_Dataty
 
 
 	  int t=0;
-	    for(t = 0; t < cmn_nbh_mat->t; t++) //Building the schedule one time step at a time
-	    {
-	    	//Each iteration of this for loop represents
-	    	//a single step of the desired final schedule.
-	    	//In each iteration, we should find out everything
-	    	//that needs to be performed in the given time step (t).
-	    	//We have to check to see what should be done at each
-	    	//step based on the cmn_nbh_mat as well as the incom_sched_mat.
+	  for(t = 0; t < cmn_nbh_mat->t; t++) { //Building the schedule one time step at a time 
+	      //Each iteration of this for loop represents
+	      //a single step of the desired final schedule.
+	      //In each iteration, we should find out everything
+	      //that needs to be performed in the given time step (t).
+	      //We have to check to see what should be done at each
+	      //step based on the cmn_nbh_mat as well as the incom_sched_mat.
 
-	    	int k;
-	    	int flag=0;
+	      int k;
+	      int flag=0;
 
-	    	  for(i = 0; i < cmn_nbh_mat->num_rows; i++)
-	    	  {
-	    		  for(k=0;k<K_vrbl-1;k++)
-	    		  {
-	    		  if(cmn_nbh_mat->comb_matrix[i][t].opt[k] != IDLE)
-	    		  {
-	    			  flag=1;
-	    			  goto exit_checktloop;
-	    		  }
-	    		  }
+	      for(i = 0; i < cmn_nbh_mat->num_rows; i++) {
+	          for(k=0;k<K_vrbl-1;k++) {
+	    	      if(cmn_nbh_mat->comb_matrix[i][t].opt[k] != IDLE) {
+	    	          flag=1;
+	    		  goto exit_checktloop;
+	    	      }
+	    	  }
+	      }
+
+	      exit_checktloop:
+	      if(flag==1) {
+	          for(k=0;k<K_vrbl-1;k++) {
+		      char *rb = ((char *)exchange_tmp_buf)+ k * recvcount * recvtype_extent;
+
+		      mpi_errno = MPID_Sched_recv(rb, recvcount, recvtype, cmn_nbh_mat->comb_matrix[i][t].grp_frnds[k], comm_ptr, s);
+		      if (mpi_errno) MPIU_ERR_POP(mpi_errno);
+
+		      mpi_errno = MPID_Sched_send(sendbuf, sendcount, sendtype, cmn_nbh_mat->comb_matrix[i][t].grp_frnds[k], comm_ptr, s);
+		      if (mpi_errno) MPIU_ERR_POP(mpi_errno);
+
+		      char *copy_from = ((char*)sendbuf);
+		      char *copy_to = ((char*)exchange_tmp_buf+ (K_vrbl-1) * recvcount * recvtype_extent);
+		      MPID_Sched_copy(copy_from, sendcount, sendtype, copy_to, sendcount, sendtype, s);
+		      MPID_SCHED_BARRIER(s);
+		   }
+		   MPID_SCHED_BARRIER(s);
+		   for(i = 0; i < cmn_nbh_mat->num_rows; i++) {
+			if(cmn_nbh_mat->comb_matrix[i][t].opt[0] == RECV && !cmn_nbh_mat->is_row_offloaded[i]) {
+			    mpi_errno = MPID_Sched_send(exchange_tmp_buf, sendcount*K_vrbl,
+							sendtype, dests[i], comm_ptr, s);
+			    if (mpi_errno) MPIU_ERR_POP(mpi_errno);
+			}
+	    	    }
+	        }
+
+	    	//Checking the incom_sched_mat now
+	    	//Scheduling necessary recv operations
+	    	for(i = 0; i < indegree; i++) {
+	    	    if(!incom_sched_mat[i][0]) { //On incoming neighbors
+	    	        if(incom_sched_mat[i][1] == t) {
+	    		    //Schedule a receive from the corresponding source.
+	    		    if(incom_sched_mat[i][K_vrbl+2]==2) {
+	    		        incom_recv_count = K_vrbl * recvcount;
+	    		    } else if(incom_sched_mat[i][K_vrbl+2]==1) {
+	    			incom_recv_count = recvcount;
+	    		    }
+
+	    		    int recv_offset=find_incom_tmp_buf_offset(incom_sched_mat, i, recvbuf_size);
+	    		    char *rb = ((char*)incom_tmp_buf) + recv_offset;
+	    		    mpi_errno = MPID_Sched_recv(rb, incom_recv_count, recvtype, srcs[i], comm_ptr, s);
+	    		    if (mpi_errno) MPIU_ERR_POP(mpi_errno);
+	    		}
+	    	     }
 	    	  }
 
-	    	  exit_checktloop:
-			  if(flag==1)
-			  {
-				  for(k=0;k<K_vrbl-1;k++)
-				  {
-					  char *rb = ((char *)exchange_tmp_buf)+ k * recvcount * recvtype_extent;
-
-					  mpi_errno = MPID_Sched_recv(rb, recvcount, recvtype, cmn_nbh_mat->comb_matrix[i][t].grp_frnds[k], comm_ptr, s);
-					  if (mpi_errno) MPIU_ERR_POP(mpi_errno);
-
-					  mpi_errno = MPID_Sched_send(sendbuf, sendcount, sendtype, cmn_nbh_mat->comb_matrix[i][t].grp_frnds[k], comm_ptr, s);
-					  if (mpi_errno) MPIU_ERR_POP(mpi_errno);
-
-					  char *copy_from = ((char*)sendbuf);
-					  char *copy_to = ((char*)exchange_tmp_buf+ (K_vrbl-1) * recvcount * recvtype_extent);
-					  MPID_Sched_copy(copy_from, sendcount, sendtype, copy_to, sendcount, sendtype, s);
-
-					  MPID_SCHED_BARRIER(s);
-
-				  }
-
-
-				  MPID_SCHED_BARRIER(s);
-				  for(i = 0; i < cmn_nbh_mat->num_rows; i++)
-				  {
-					  if(cmn_nbh_mat->comb_matrix[i][t].opt[0] == RECV && !cmn_nbh_mat->is_row_offloaded[i])
-					  {
-						  mpi_errno = MPID_Sched_send(exchange_tmp_buf, sendcount*K_vrbl,
-								  sendtype, dests[i], comm_ptr, s);
-						  if (mpi_errno) MPIU_ERR_POP(mpi_errno);
-
-					  }
-	    	  }
-	    }
-
-	    	  //Checking the incom_sched_mat now
-	    	  //Scheduling necessary recv operations
-	    	  for(i = 0; i < indegree; i++)
-	    	  {
-	    		  if(!incom_sched_mat[i][0]) //On incoming neighbors
-	    		  {
-	    			  if(incom_sched_mat[i][1] == t)
-	    			  {
-	    				  //Schedule a receive from the corresponding source.
-	    				  if(incom_sched_mat[i][K_vrbl+2]==2)
-	    				  {
-	    				  incom_recv_count = K_vrbl * recvcount;
-	    				  }
-	    				  else if(incom_sched_mat[i][K_vrbl+2]==1)
-	    				  {
-	    					  incom_recv_count = recvcount;
-	    				  }
-
-	    				  int recv_offset=find_incom_tmp_buf_offset(incom_sched_mat, i, recvbuf_size);
-	    				  char *rb = ((char*)incom_tmp_buf) + recv_offset;
-	    				  mpi_errno = MPID_Sched_recv(rb, incom_recv_count, recvtype, srcs[i], comm_ptr, s);
-	    				  if (mpi_errno) MPIU_ERR_POP(mpi_errno);
-	    			  }
-	    		  }
-
-	    	  }
 	    	  MPID_SCHED_BARRIER(s); //Making sure the message has completely been received in tmp bufer before attempting to copy it.*/
 
 	    	  //Scheduling message copies from incom_tmp_buf to final recv_buf
-	    	  for(i = 0; i < indegree; i++)
-	    	  {
-	    		  if(!incom_sched_mat[i][0]) //On incoming neighbors
-	    		  {
-	    			  if(incom_sched_mat[i][1] == t)
-	    			  {
-	    				  int nbr_idx, offset1;
-	    				  offset1 = find_incom_tmp_buf_offset(incom_sched_mat, i, recvbuf_size);
+	    	  for(i = 0; i < indegree; i++) {
+	    	      if(!incom_sched_mat[i][0]) { //On incoming neighbors
+	    	          if(incom_sched_mat[i][1] == t) {
+	    		      int nbr_idx, offset1;
+	    		      offset1 = find_incom_tmp_buf_offset(incom_sched_mat, i, recvbuf_size);
 
+	    		      if(incom_sched_mat[i][2]>=0) { //it means that it has the combined message for other group friends
+	    		          for(j = 0; j < K_vrbl; j++) {
+	    			      nbr_idx = find_in_arr(srcs, indegree, incom_sched_mat[i][j+2]);
 
-	    				  if(incom_sched_mat[i][2]>=0) //it means that it has the combined message for other group friends
-	    				 {
-	    				  for(j = 0; j < K_vrbl; j++)
-	    				  {
-	    					  nbr_idx = find_in_arr(srcs, indegree, incom_sched_mat[i][j+2]);
-
-	    					  if(nbr_idx>=0)
-	    					  {
-	    					  char *copy_from = ((char*)incom_tmp_buf) + offset1 +  j * recvcount * recvtype_extent;
-	    					  char *copy_to = ((char*)recvbuf) + nbr_idx * recvcount * recvtype_extent;
-	    					  MPID_Sched_copy(copy_from, recvcount, recvtype,
+	    			      if(nbr_idx>=0) {
+	    			          char *copy_from = ((char*)incom_tmp_buf) + offset1 +  j * recvcount * recvtype_extent;
+	    				  char *copy_to = ((char*)recvbuf) + nbr_idx * recvcount * recvtype_extent;
+	    			          MPID_Sched_copy(copy_from, recvcount, recvtype,
 	    							  copy_to, recvcount, recvtype, s);
-
-	    					  }
-	    					  }
-
-	    				  }
-	    				  else
-	    				  {
-	    					  nbr_idx = find_in_arr(srcs, indegree, incom_sched_mat[i][K_vrbl+1]);
-
-	    					  char *copy_from = ((char*)incom_tmp_buf) + offset1 ;
-	    					  char *copy_to = ((char*)recvbuf) + nbr_idx * recvcount * recvtype_extent;
-	    					  MPID_Sched_copy(copy_from, recvcount, recvtype,
-	    							  copy_to, recvcount, recvtype, s);
-	    				  }
-
-	      			  }
-	    		  }
+	    			      }
+	    			  }
+	    		     } else {
+	    		         nbr_idx = find_in_arr(srcs, indegree, incom_sched_mat[i][K_vrbl+1]);
+	    			 char *copy_from = ((char*)incom_tmp_buf) + offset1 ;
+	    			 char *copy_to = ((char*)recvbuf) + nbr_idx * recvcount * recvtype_extent;
+	    			 MPID_Sched_copy(copy_from, recvcount, recvtype,
+	    						copy_to, recvcount, recvtype, s);
+	    		     }
+	      		  }
+	    	      }
 	    	  }
 	    	  MPID_SCHED_BARRIER(s);
 	    }
@@ -269,71 +231,63 @@ int MPIR_Ineighbor_allgather_SMGM(const void *sendbuf, int sendcount, MPI_Dataty
 	     * them. That is, we have to communicate with
 	     * them one by one in a simple naive way.
 	     */
-	    MPID_SCHED_BARRIER(s);//This is needed here because otherwise, a send with a combined message issued above, could be received by a recv operation issued below. This could happen because we have that 'break' after issuing outgoing sends.
-	    for(i = 0; i < cmn_nbh_mat->num_rows; i++)
-	    {
-	    	if(!cmn_nbh_mat->ignore_row[i]) //out neighbor still active
-	    	{
-	    		mpi_errno = MPID_Sched_send(sendbuf, sendcount, sendtype,
+	    MPID_SCHED_BARRIER(s);
+	    /* Barrier is needed here because otherwise, a 
+	     * send with a combined message issued above, 
+	     * could be received by a recv operation issued 
+	     * below. This could happen because we have that 
+	     * 'break' after issuing outgoing sends.*/
+
+	    for(i = 0; i < cmn_nbh_mat->num_rows; i++) {
+	        if(!cmn_nbh_mat->ignore_row[i]) { //out neighbor still active
+	    	    mpi_errno = MPID_Sched_send(sendbuf, sendcount, sendtype,
 	    				dests[i], comm_ptr, s);
-	    		if (mpi_errno) MPIU_ERR_POP(mpi_errno);
+	    	    if (mpi_errno) MPIU_ERR_POP(mpi_errno);
 	    	}
 	    }
 
-	    for(i = 0; i < indegree; i++)
-	    {
-	    	if(!incom_sched_mat[i][0] && incom_sched_mat[i][1] >= cmn_nbh_mat->t) //On incoming neighbors not covered before
-	    	{
-	    		//Schedule a receive from the corresponding source.
-	    		if(incom_sched_mat[i][K_vrbl+2]==2)
-	    		{
-	    			incom_recv_count =  K_vrbl * recvcount;
-	    		}
-	    		else if(incom_sched_mat[i][K_vrbl+2]==1)
-	    		{
-	    			incom_recv_count = recvcount;
-	    		}
+	    for(i = 0; i < indegree; i++) {
+	    	if(!incom_sched_mat[i][0] && incom_sched_mat[i][1] >= cmn_nbh_mat->t) { //On incoming neighbors not covered before
+	    	    //Schedule a receive from the corresponding source.
+	    	    if(incom_sched_mat[i][K_vrbl+2]==2) {
+	    	        incom_recv_count =  K_vrbl * recvcount;
+	    	    } else if(incom_sched_mat[i][K_vrbl+2]==1) {
+	    		incom_recv_count = recvcount;
+	    	    }
 
-	    		char *rb = ((char*)incom_tmp_buf) + find_incom_tmp_buf_offset(incom_sched_mat, i, recvbuf_size);
-	    		mpi_errno = MPID_Sched_recv(rb, incom_recv_count, recvtype, srcs[i], comm_ptr, s);
-	    		if (mpi_errno) MPIU_ERR_POP(mpi_errno);
+	    	    char *rb = ((char*)incom_tmp_buf) + find_incom_tmp_buf_offset(incom_sched_mat, i, recvbuf_size);
+	    	    mpi_errno = MPID_Sched_recv(rb, incom_recv_count, recvtype, srcs[i], comm_ptr, s);
+	    	    if (mpi_errno) MPIU_ERR_POP(mpi_errno);
 	    	}
 	    }
 	    MPID_SCHED_BARRIER(s);
 
 	    //Scheduling message copies from incom_tmp_buf to final recv_buf
-	    for(i = 0; i < indegree; i++)
-	    {
-	    	if(!incom_sched_mat[i][0] && incom_sched_mat[i][1] >= cmn_nbh_mat->t) //On incoming neighbors not covered before
-	    	{
-	    		int nbr_idx, offset1;
-	    		offset1 = find_incom_tmp_buf_offset(incom_sched_mat, i, recvbuf_size);
+	    for(i = 0; i < indegree; i++) {
+	    	if(!incom_sched_mat[i][0] && incom_sched_mat[i][1] >= cmn_nbh_mat->t) { //On incoming neighbors not covered before 
+	    	    int nbr_idx, offset1;
+	    	    offset1 = find_incom_tmp_buf_offset(incom_sched_mat, i, recvbuf_size);
 
-	    		if(incom_sched_mat[i][2]>=0) //it means that it has the combined message for other group friends
-	    		{
-	    		for(j = 0; j < K_vrbl; j++)
-	    		{
-	    			//A completely different (potentially recursive) approach is needed for the cumulative case
-	    			nbr_idx = find_in_arr(srcs, indegree, incom_sched_mat[i][j + 2]);
+	    	    if(incom_sched_mat[i][2]>=0) { //it means that it has the combined message for other group friends
+	    		for(j = 0; j < K_vrbl; j++) {
+	    		    //A completely different (potentially recursive) approach is needed for the cumulative case
+	    		    nbr_idx = find_in_arr(srcs, indegree, incom_sched_mat[i][j + 2]);
 
-	    			if(nbr_idx>=0)
-	    			{
-	    			char *copy_from = ((char*)incom_tmp_buf) + offset1 + j * recvcount * recvtype_extent;
+	    		    if(nbr_idx>=0) {
+	    		        char *copy_from = ((char*)incom_tmp_buf) + offset1 + j * recvcount * recvtype_extent;
 	    			char *copy_to = ((char*)recvbuf) + nbr_idx * recvcount * recvtype_extent;
 	    			MPID_Sched_copy(copy_from, recvcount, recvtype,
 	    					copy_to, recvcount, recvtype, s);
-	    			}
+	    		    }
 	    		}
-	    		}
-	    		else
-	    		{
-	    			nbr_idx = find_in_arr(srcs, indegree, incom_sched_mat[i][K_vrbl+1]);
+	    	    } else {
+	    		nbr_idx = find_in_arr(srcs, indegree, incom_sched_mat[i][K_vrbl+1]);
 
-	    			char *copy_from = ((char*)incom_tmp_buf) + offset1 ;
-	    			char *copy_to = ((char*)recvbuf) + nbr_idx * recvcount * recvtype_extent;
-	    			MPID_Sched_copy(copy_from, recvcount, recvtype,
+	    		char *copy_from = ((char*)incom_tmp_buf) + offset1 ;
+	    		char *copy_to = ((char*)recvbuf) + nbr_idx * recvcount * recvtype_extent;
+	    		MPID_Sched_copy(copy_from, recvcount, recvtype,
 	    					copy_to, recvcount, recvtype, s);
-	    		}
+	    	   }
 	    	}
 	    }
 
@@ -474,15 +428,12 @@ int MPIR_Ineighbor_allgather_impl(const void *sendbuf, int sendcount, MPI_Dataty
     MPIU_Assert(comm_ptr->coll_fns != NULL);
     MPIU_Assert(comm_ptr->coll_fns->Ineighbor_allgather != NULL);
 
-    if(nbr_impl == 0)
-    {
-    mpi_errno = MPIR_Ineighbor_allgather_default(sendbuf, sendcount, sendtype,
+    if(nbr_impl == 0) {
+        mpi_errno = MPIR_Ineighbor_allgather_default(sendbuf, sendcount, sendtype,
     	                                                        recvbuf, recvcount, recvtype,
     	                                                        comm_ptr, s);
-    }
-    else
-    {
-    	 mpi_errno = MPIR_Ineighbor_allgather_SMGM(sendbuf, sendcount, sendtype,
+    } else {
+        mpi_errno = MPIR_Ineighbor_allgather_SMGM(sendbuf, sendcount, sendtype,
     	    	                                                        recvbuf, recvcount, recvtype,
     	    	                                                        comm_ptr, s);
     }
